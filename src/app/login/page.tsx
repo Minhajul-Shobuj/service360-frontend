@@ -8,7 +8,7 @@ type FormValues = {
   password: string;
 };
 
-export default function LoginForm() {
+export default function Login() {
   const {
     register,
     handleSubmit,
@@ -25,6 +25,7 @@ export default function LoginForm() {
         <h2 className="text-2xl font-bold text-gray-900 mb-6 text-center">
           Welcome Back
         </h2>
+
         <form onSubmit={handleSubmit(onSubmit)} className="space-y-5">
           {/* Email */}
           <div>
@@ -35,11 +36,9 @@ export default function LoginForm() {
               type="email"
               placeholder="example@mail.com"
               {...register("email", { required: "Email is required" })}
-              className={`w-full px-4 py-2 rounded-md border ${
-                errors.email
-                  ? "border-red-500"
-                  : "border-gray-300 focus:border-green-500"
-              } focus:outline-none`}
+              className={`w-full px-4 py-2 rounded-md border text-gray-900 placeholder:text-gray-400 ${
+                errors.email ? "border-red-500" : "border-gray-300"
+              } focus:outline-none focus:border-green-500`}
             />
             {errors.email && (
               <p className="text-red-500 text-xs mt-1">
@@ -57,11 +56,9 @@ export default function LoginForm() {
               type="password"
               placeholder="••••••••"
               {...register("password", { required: "Password is required" })}
-              className={`w-full px-4 py-2 rounded-md border ${
-                errors.password
-                  ? "border-red-500"
-                  : "border-gray-300 focus:border-green-500"
-              } focus:outline-none`}
+              className={`w-full px-4 py-2 rounded-md border text-gray-900 placeholder:text-gray-400 ${
+                errors.password ? "border-red-500" : "border-gray-300"
+              } focus:outline-none focus:border-green-500`}
             />
             {errors.password && (
               <p className="text-red-500 text-xs mt-1">
@@ -80,7 +77,7 @@ export default function LoginForm() {
         </form>
 
         <p className="text-sm text-gray-600 mt-4 text-center">
-          Don`t have an account?{" "}
+          Don’t have an account?{" "}
           <Link href="/registration" className="text-green-500 hover:underline">
             Sign Up
           </Link>
