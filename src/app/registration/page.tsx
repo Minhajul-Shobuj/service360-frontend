@@ -11,7 +11,7 @@ type RegisterValues = {
   phone?: string;
 };
 
-export default function RegisterForm() {
+export default function Registration() {
   const [activeTab, setActiveTab] = useState<"user" | "provider">("user");
 
   const {
@@ -66,9 +66,9 @@ export default function RegisterForm() {
             </label>
             <input
               type="text"
-              {...register("name", { required: "Name is required" })}
               placeholder="Your name"
-              className={`w-full px-4 py-2 rounded-md border placeholder:text-black ${
+              {...register("name", { required: "Name is required" })}
+              className={`w-full px-4 py-2 rounded-md border text-gray-900 placeholder:text-gray-400 ${
                 errors.name ? "border-red-500" : "border-gray-300"
               } focus:outline-none focus:border-green-500`}
             />
@@ -84,9 +84,9 @@ export default function RegisterForm() {
             </label>
             <input
               type="email"
-              {...register("email", { required: "Email is required" })}
               placeholder="your@email.com"
-              className={`w-full px-4 py-2 rounded-md border placeholder:text-black ${
+              {...register("email", { required: "Email is required" })}
+              className={`w-full px-4 py-2 rounded-md border text-gray-900 placeholder:text-gray-400 ${
                 errors.email ? "border-red-500" : "border-gray-300"
               } focus:outline-none focus:border-green-500`}
             />
@@ -104,9 +104,9 @@ export default function RegisterForm() {
             </label>
             <input
               type="password"
-              {...register("password", { required: "Password is required" })}
               placeholder="••••••••"
-              className={`w-full px-4 py-2 rounded-md border placeholder:text-black ${
+              {...register("password", { required: "Password is required" })}
+              className={`w-full px-4 py-2 rounded-md border text-gray-900 placeholder:text-gray-400 ${
                 errors.password ? "border-red-500" : "border-gray-300"
               } focus:outline-none focus:border-green-500`}
             />
@@ -127,11 +127,11 @@ export default function RegisterForm() {
                 </label>
                 <input
                   type="text"
+                  placeholder="Business or Company"
                   {...register("company", {
                     required: "Company name is required",
                   })}
-                  placeholder="Business or Company"
-                  className={`w-full px-4 py-2 rounded-md border placeholder:text-black ${
+                  className={`w-full px-4 py-2 rounded-md border text-gray-900 placeholder:text-gray-400 ${
                     errors.company ? "border-red-500" : "border-gray-300"
                   } focus:outline-none focus:border-green-500`}
                 />
@@ -149,11 +149,11 @@ export default function RegisterForm() {
                 </label>
                 <input
                   type="text"
+                  placeholder="01XXXXXXXXX"
                   {...register("phone", {
                     required: "Phone number is required",
                   })}
-                  placeholder="01XXXXXXXXX"
-                  className={`w-full px-4 py-2 rounded-md border placeholder:text-black ${
+                  className={`w-full px-4 py-2 rounded-md border text-gray-900 placeholder:text-gray-400 ${
                     errors.phone ? "border-red-500" : "border-gray-300"
                   } focus:outline-none focus:border-green-500`}
                 />
