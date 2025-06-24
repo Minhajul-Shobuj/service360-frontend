@@ -1,4 +1,5 @@
 import HeroSection from "@/Component/Home/HeroSection";
+import ServicesSection from "@/Component/Home/ServiceSection";
 import Navbar from "@/Component/Shared/Navbar";
 
 export default function Home() {
@@ -6,6 +7,7 @@ export default function Home() {
     <div>
       <Navbar />
       <HeroSection />
+      <ServicesSection />
     </div>
   );
 }
