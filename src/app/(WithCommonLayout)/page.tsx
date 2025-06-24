@@ -1,3 +1,4 @@
+import ExpertTeamSection from "@/Component/Home/ExpertSection";
 import HeroSection from "@/Component/Home/HeroSection";
 import ServicesSection from "@/Component/Home/ServiceSection";
 import Navbar from "@/Component/Shared/Navbar";
@@ -8,6 +9,7 @@ export default function Home() {
       <Navbar />
       <HeroSection />
       <ServicesSection />
+      <ExpertTeamSection />
     </div>
   );
 }

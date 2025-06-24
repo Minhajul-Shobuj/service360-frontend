@@ -29,7 +29,7 @@ const team = [
 
 export default function ExpertTeamSection() {
   return (
-    <section className="py-16 px-6">
+    <section className="py-16 px-6 bg-white">
       <div className="max-w-7xl mx-auto">
         {/* Header */}
         <div className="flex flex-col md:flex-row justify-between items-start mb-10 gap-6">
