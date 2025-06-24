@@ -2,6 +2,7 @@
 
 import { useForm } from "react-hook-form";
 import { useState } from "react";
+import Link from "next/link";
 
 type RegisterValues = {
   name: string;
@@ -177,9 +178,9 @@ export default function Registration() {
 
         <p className="text-sm text-gray-600 mt-4 text-center">
           Already have an account?{" "}
-          <a href="#" className="text-green-500 hover:underline">
+          <Link href="/login" className="text-green-500 hover:underline">
             Login
-          </a>
+          </Link>
         </p>
       </div>
     </section>
