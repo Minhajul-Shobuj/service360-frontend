@@ -2,6 +2,7 @@ import ExpertTeamSection from "@/Component/Home/ExpertSection";
 import HeroSection from "@/Component/Home/HeroSection";
 import ServicesSection from "@/Component/Home/ServiceSection";
 import TestimonialSection from "@/Component/Home/TestimonialSection";
+import Footer from "@/Component/Shared/Footer";
 import Navbar from "@/Component/Shared/Navbar";
 
 export default function Home() {
@@ -12,6 +13,7 @@ export default function Home() {
       <ServicesSection />
       <ExpertTeamSection />
       <TestimonialSection />
+      <Footer />
     </div>
   );
 }
