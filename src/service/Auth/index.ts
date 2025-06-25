@@ -1,5 +1,7 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 "use server";
 
+import { jwtDecode } from "jwt-decode";
 import { cookies } from "next/headers";
 
 export const Register = async (userdata: any) => {
@@ -39,5 +41,17 @@ export const Login = async (userdata: any) => {
   } catch (error) {
     console.error("Error during login:", error);
     throw new Error("Login failed");
+  }
+};
+
+export const getCurrentUser = async () => {
+  const accessToken = (await cookies()).get("accessToken")?.value;
+
+  let decoded;
+  if (accessToken) {
+    decoded = jwtDecode(accessToken);
+    return decoded;
+  } else {
+    return null;
   }
 };
