@@ -44,6 +44,15 @@ export const Login = async (userdata: any) => {
   }
 };
 
+export const logout = async () => {
+  try {
+    (await cookies()).delete("accessToken");
+  } catch (error) {
+    console.error("Error during logout:", error);
+    throw new Error("Logout failed");
+  }
+};
+
 export const getCurrentUser = async () => {
   const accessToken = (await cookies()).get("accessToken")?.value;
 
