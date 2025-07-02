@@ -1,47 +1,53 @@
 "use client";
-import Image from "next/image";
 import React from "react";
 
-const ImageUploader = () => {
-  const [iamgefiles, setImageFiles] = React.useState<File[]>([]);
-  const [iamgePreview, setiamgePreview] = React.useState<string[]>([]);
-  const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const files = event.target.files![0];
-    if (files) {
-      setImageFiles((prev) => [...prev, files]);
+type TImageUploader = {
+  label?: string;
+  className?: string;
+  setImageFiles: React.Dispatch<React.SetStateAction<File[]>>;
+  setImagePreview: React.Dispatch<React.SetStateAction<string[]>>;
+};
+const ImageUploader = ({
+  label = "Upload Images",
+  className,
+  setImageFiles,
+  setImagePreview,
+}: TImageUploader) => {
+  const handleImageChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const file = event.target.files![0];
+
+    setImageFiles((prev) => [...prev, file]);
+
+    if (file) {
       const reader = new FileReader();
-      reader.onload = () => {
-        setiamgePreview((prev) => [...prev, reader.result as string]);
+
+      reader.onloadend = () => {
+        setImagePreview((prev) => [...prev, reader.result as string]);
       };
-      reader.readAsDataURL(files);
-      event.target.value = "";
+
+      reader.readAsDataURL(file);
     }
+
+    event.target.value = "";
   };
+
   return (
-    <>
-      <div className="flex items-center justify-center bg-black">
-        <input
-          onChange={handleFileChange}
-          type="file"
-          multiple
-          accept="image/*"
-          id="img-uploader"
-          className="hidden"
-        />
-        <label htmlFor="img-uploader">Upload Image</label>
-        <div>
-          {iamgePreview.map((preview, idx) => (
-            <Image
-              src={preview}
-              key={idx}
-              height={100}
-              width={100}
-              alt="image"
-            />
-          ))}
-        </div>
-      </div>
-    </>
+    <div className={`flex flex-col items-center w-full gap-4 ${className}`}>
+      <input
+        id="image-upload"
+        type="file"
+        accept="image/*"
+        multiple
+        className="hidden"
+        onChange={handleImageChange}
+      />
+      <label
+        htmlFor="image-upload"
+        className="w-full h-36 md:size-36 flex items-center justify-center border-2 border-dashed border-gray-300 rounded-md cursor-pointer text-center text-sm text-gray-500 hover:bg-gray-50 transition"
+      >
+        {label}
+      </label>
+    </div>
   );
 };
 
