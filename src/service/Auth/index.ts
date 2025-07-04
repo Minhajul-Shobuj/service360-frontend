@@ -1,6 +1,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 "use server";
 
+import { IUser } from "@/types";
 import { jwtDecode } from "jwt-decode";
 import { cookies } from "next/headers";
 
@@ -53,12 +54,12 @@ export const logout = async () => {
   }
 };
 
-export const getCurrentUser = async () => {
+export const getCurrentUser = async (): Promise<IUser | null> => {
   const accessToken = (await cookies()).get("accessToken")?.value;
 
   let decoded;
   if (accessToken) {
-    decoded = jwtDecode(accessToken);
+    decoded = jwtDecode<IUser>(accessToken);
     return decoded;
   } else {
     return null;
