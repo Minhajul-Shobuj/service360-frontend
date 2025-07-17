@@ -8,7 +8,7 @@ type TImageUploader = {
   setImagePreview: React.Dispatch<React.SetStateAction<string[]>>;
 };
 const ImageUploader = ({
-  label = "Upload Images",
+  label,
   className,
   setImageFiles,
   setImagePreview,

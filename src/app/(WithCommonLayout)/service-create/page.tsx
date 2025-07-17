@@ -1,16 +1,9 @@
 "use client";
 
+import { TService } from "@/types/service";
 import { useForm } from "react-hook-form";
 import Select from "react-select";
 
-type ServiceFormValues = {
-  title: string;
-  description: string;
-  base_price: number;
-  price_unit: string;
-  estimed_duration: string;
-  category: string[]; // assuming multi-select
-};
 const dummyCategories = [
   { id: "01JYCJ2F945T25238E44PHFP3C", name: "Car Wash" },
   { id: "02ABC123XYZ456", name: "Oil Change" },
@@ -23,7 +16,7 @@ export default function CreateServicePage() {
     handleSubmit,
     setValue,
     formState: { errors },
-  } = useForm<ServiceFormValues>({
+  } = useForm<TService>({
     defaultValues: {
       title: "",
       description: "",
@@ -39,7 +32,7 @@ export default function CreateServicePage() {
     label: cat.name,
   }));
 
-  const onSubmit = async (data: ServiceFormValues) => {
+  const onSubmit = async (data: TService) => {
     console.log("Submitting:", data);
 
     // try {
