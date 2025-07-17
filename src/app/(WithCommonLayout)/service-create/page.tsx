@@ -78,7 +78,7 @@ export default function CreateServicePage() {
             type="text"
             placeholder="Enter service title"
             {...register("title", { required: "Title is required" })}
-            className={`w-full px-4 py-2 rounded-lg border ${
+            className={`w-full px-4 py-2 rounded-lg border text-black ${
               errors.title ? "border-red-500" : "border-gray-300"
             } focus:outline-none focus:ring-2 focus:ring-blue-500`}
           />
@@ -98,7 +98,7 @@ export default function CreateServicePage() {
             {...register("description", {
               required: "Description is required",
             })}
-            className={`w-full px-4 py-2 rounded-lg border ${
+            className={`w-full px-4 py-2 rounded-lg border text-black ${
               errors.description ? "border-red-500" : "border-gray-300"
             } focus:outline-none focus:ring-2 focus:ring-blue-500`}
           />
@@ -122,7 +122,7 @@ export default function CreateServicePage() {
               required: "Base price is required",
               valueAsNumber: true,
             })}
-            className={`w-full px-4 py-2 rounded-lg border ${
+            className={`w-full px-4 py-2 rounded-lg border text-black ${
               errors.base_price ? "border-red-500" : "border-gray-300"
             } focus:outline-none focus:ring-2 focus:ring-blue-500`}
           />
@@ -142,7 +142,7 @@ export default function CreateServicePage() {
             type="text"
             placeholder="e.g. per vehicle"
             {...register("price_unit", { required: "Price unit is required" })}
-            className={`w-full px-4 py-2 rounded-lg border ${
+            className={`w-full px-4 py-2 rounded-lg border text-black ${
               errors.price_unit ? "border-red-500" : "border-gray-300"
             } focus:outline-none focus:ring-2 focus:ring-blue-500`}
           />
@@ -164,7 +164,7 @@ export default function CreateServicePage() {
             {...register("estimed_duration", {
               required: "Duration is required",
             })}
-            className={`w-full px-4 py-2 rounded-lg border ${
+            className={`w-full px-4 py-2 rounded-lg border text-black ${
               errors.estimed_duration ? "border-red-500" : "border-gray-300"
             } focus:outline-none focus:ring-2 focus:ring-blue-500`}
           />
@@ -183,15 +183,23 @@ export default function CreateServicePage() {
           <Select
             options={categoryOptions}
             isMulti
-            className="text-sm"
-            classNamePrefix="react-select"
             onChange={(selectedOptions) =>
               setValue(
                 "category",
                 selectedOptions.map((option) => option.value)
               )
             }
+            styles={{
+              control: (base) => ({ ...base, color: "black" }),
+              input: (base) => ({ ...base, color: "black" }),
+              multiValueLabel: (base) => ({ ...base, color: "black" }),
+              menu: (base) => ({ ...base, color: "black" }),
+              option: (base) => ({ ...base, color: "black" }),
+            }}
+            className="text-black"
+            classNamePrefix="react-select"
           />
+
           {errors.category && (
             <p className="text-red-500 text-sm mt-1">
               {errors.category.message}
