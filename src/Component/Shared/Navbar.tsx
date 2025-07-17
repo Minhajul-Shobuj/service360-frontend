@@ -167,17 +167,33 @@ export default function Navbar() {
                     className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-green-500"
                     onClick={() => setIsProfileDropdownOpen(false)}
                   >
-                    User Profile
+                    Profile
+                  </Link>
+                  <Link
+                    href="/profile/user"
+                    className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-green-500"
+                    onClick={() => setIsProfileDropdownOpen(false)}
+                  >
+                    Logout
                   </Link>
 
                   {user?.role === "SERVICE_PROVIDER" && (
-                    <Link
-                      href="/profile/provider"
-                      className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-green-500"
-                      onClick={() => setIsProfileDropdownOpen(false)}
-                    >
-                      Service Provider Profile
-                    </Link>
+                    <div>
+                      <Link
+                        href="/profile/provider"
+                        className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-green-500"
+                        onClick={() => setIsProfileDropdownOpen(false)}
+                      >
+                        My Services
+                      </Link>
+                      <Link
+                        href="/service-create"
+                        className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-green-500"
+                        onClick={() => setIsProfileDropdownOpen(false)}
+                      >
+                        Create Service
+                      </Link>
+                    </div>
                   )}
 
                   {user?.role === "ADMIN" && (
