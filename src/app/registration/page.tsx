@@ -3,22 +3,7 @@
 import { useForm } from "react-hook-form";
 import { useState } from "react";
 import Link from "next/link";
-
-type RegisterValues = {
-  fullName: string;
-  email: string;
-  password: string;
-  company?: string;
-  phone?: string;
-  address: {
-    street_address: string;
-    city: string;
-    state: string;
-    postal_code: number;
-    latitude: number;
-    longitude: number;
-  };
-};
+import { RegisterUser } from "@/types";
 
 export default function Registration() {
   const [activeTab, setActiveTab] = useState<"user" | "provider">("user");
@@ -28,9 +13,9 @@ export default function Registration() {
     handleSubmit,
     reset,
     formState: { errors },
-  } = useForm<RegisterValues>();
+  } = useForm<RegisterUser>();
 
-  const onSubmit = (data: RegisterValues) => {
+  const onSubmit = (data: RegisterUser) => {
     console.log("Form submitted:", data);
     reset();
   };
