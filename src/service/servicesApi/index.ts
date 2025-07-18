@@ -46,3 +46,24 @@ export const getAllservices = async () => {
     throw new Error("Failed to fetch services");
   }
 };
+
+export const getServiceById = async (id: string) => {
+  if (!accessToken) {
+    throw new Error("You are not authenticated");
+  }
+  try {
+    const res = await fetch(`api/services/${id}`, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: accessToken,
+      },
+      cache: "no-store",
+    });
+    const result = await res.json();
+    return result;
+  } catch (error) {
+    console.error("Error fetching service by ID:", error);
+    throw new Error("Failed to fetch service");
+  }
+};
