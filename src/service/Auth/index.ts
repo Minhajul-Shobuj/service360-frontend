@@ -65,3 +65,27 @@ export const getCurrentUser = async (): Promise<IUser | null> => {
     return null;
   }
 };
+
+export const myProfile = async () => {
+  const accessToken = (await cookies()).get("accessToken")?.value;
+
+  if (!accessToken) {
+    throw new Error("Access token is missing");
+  }
+
+  try {
+    const res = await fetch("api/auth/my-profile", {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: accessToken,
+      },
+      cache: "no-store",
+    });
+    const result = await res.json();
+    return result;
+  } catch (error) {
+    console.error("Error fetching profile:", error);
+    throw new Error("Failed to fetch profile");
+  }
+};
