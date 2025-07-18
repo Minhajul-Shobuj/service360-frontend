@@ -2,16 +2,27 @@
 
 import { useState, useEffect } from "react";
 import { useParams, useRouter } from "next/navigation";
-import { FaStar, FaMapMarkerAlt, FaPhone, FaEnvelope, FaClock, FaCheck, FaCalendar, FaUser, FaTools, FaShieldAlt, FaCreditCard, FaInfoCircle } from "react-icons/fa";
-import Navbar from "@/Component/Shared/Navbar";
-import Footer from "@/Component/Shared/Footer";
-import { allCategories, categoryDetails, providersByCategory } from "../../categoriesData";
+import {
+  FaStar,
+  FaMapMarkerAlt,
+  FaPhone,
+  FaClock,
+  FaCheck,
+  FaCalendar,
+  FaTools,
+  FaShieldAlt,
+  FaCreditCard,
+  FaInfoCircle,
+} from "react-icons/fa";
+import Navbar from "@/component/Shared/Navbar";
+import Footer from "@/component/Shared/Footer";
+import { providersByCategory } from "../../categoriesData";
 
 // Mock provider data - this will come from your backend
 const getProviderData = (category: string, providerId: string) => {
   const providers = providersByCategory[category] || [];
   const provider = providers[parseInt(providerId) || 0] || providers[0];
-  
+
   return {
     id: providerId,
     name: provider.name,
@@ -28,7 +39,7 @@ const getProviderData = (category: string, providerId: string) => {
       "Quality Guarantee",
       "On-time Delivery",
       "Free Consultation",
-      "Warranty Included"
+      "Warranty Included",
     ],
     availability: [
       { day: "Monday", time: "9:00 AM - 6:00 PM" },
@@ -37,13 +48,25 @@ const getProviderData = (category: string, providerId: string) => {
       { day: "Thursday", time: "9:00 AM - 6:00 PM" },
       { day: "Friday", time: "9:00 AM - 6:00 PM" },
       { day: "Saturday", time: "10:00 AM - 4:00 PM" },
-      { day: "Sunday", time: "Closed" }
+      { day: "Sunday", time: "Closed" },
     ],
     reviews: [
-      { user: "Ahmed Khan", rating: 5, comment: "Excellent service, very professional and punctual." },
-      { user: "Fatima Begum", rating: 5, comment: "Highly recommended! Quality work and fair pricing." },
-      { user: "Rahim Ali", rating: 4, comment: "Good service, would use again." }
-    ]
+      {
+        user: "Ahmed Khan",
+        rating: 5,
+        comment: "Excellent service, very professional and punctual.",
+      },
+      {
+        user: "Fatima Begum",
+        rating: 5,
+        comment: "Highly recommended! Quality work and fair pricing.",
+      },
+      {
+        user: "Rahim Ali",
+        rating: 4,
+        comment: "Good service, would use again.",
+      },
+    ],
   };
 };
 
@@ -52,7 +75,7 @@ export default function ServiceDetailsPage() {
   const router = useRouter();
   const category = decodeURIComponent(params.category as string);
   const providerId = params.providerId as string;
-  
+
   const [provider, setProvider] = useState<any>(null);
   const [selectedDate, setSelectedDate] = useState("");
   const [selectedTime, setSelectedTime] = useState("");
@@ -72,10 +95,10 @@ export default function ServiceDetailsPage() {
   const handleBooking = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsBooking(true);
-    
+
     // Simulate API call
-    await new Promise(resolve => setTimeout(resolve, 2000));
-    
+    await new Promise((resolve) => setTimeout(resolve, 2000));
+
     // Here you would make the actual API call to your backend
     console.log("Booking submitted:", {
       providerId,
@@ -85,9 +108,9 @@ export default function ServiceDetailsPage() {
       serviceType,
       address,
       phone,
-      notes
+      notes,
     });
-    
+
     setIsBooking(false);
     // Redirect to confirmation page or show success message
     alert("Booking submitted successfully! We'll contact you soon.");
@@ -116,9 +139,27 @@ export default function ServiceDetailsPage() {
           {/* Breadcrumb */}
           <nav className="mb-8">
             <ol className="flex items-center space-x-2 text-sm text-gray-600">
-              <li><button onClick={() => router.push('/service')} className="hover:text-green-600">Services</button></li>
+              <li>
+                <button
+                  onClick={() => router.push("/service")}
+                  className="hover:text-green-600"
+                >
+                  Services
+                </button>
+              </li>
               <li>/</li>
-              <li><button onClick={() => router.push(`/service?category=${encodeURIComponent(category)}`)} className="hover:text-green-600">{category}</button></li>
+              <li>
+                <button
+                  onClick={() =>
+                    router.push(
+                      `/service?category=${encodeURIComponent(category)}`
+                    )
+                  }
+                  className="hover:text-green-600"
+                >
+                  {category}
+                </button>
+              </li>
               <li>/</li>
               <li className="text-green-600 font-medium">{provider.name}</li>
             </ol>
@@ -132,10 +173,16 @@ export default function ServiceDetailsPage() {
                 <div className="flex items-start justify-between mb-4">
                   <div className="flex items-center">
                     <div className="w-16 h-16 rounded-full bg-green-100 flex items-center justify-center text-green-700 font-bold text-2xl mr-4">
-                      {provider.name.split(" ").map(n => n[0]).join("").toUpperCase()}
+                      {provider.name
+                        .split(" ")
+                        .map((n) => n[0])
+                        .join("")
+                        .toUpperCase()}
                     </div>
                     <div>
-                      <h1 className="text-2xl font-bold text-gray-900 mb-1">{provider.name}</h1>
+                      <h1 className="text-2xl font-bold text-gray-900 mb-1">
+                        {provider.name}
+                      </h1>
                       <div className="flex items-center space-x-4 text-sm text-gray-600">
                         <div className="flex items-center">
                           <FaMapMarkerAlt className="mr-1" />
@@ -156,17 +203,30 @@ export default function ServiceDetailsPage() {
                   </div>
                   <div className="text-right">
                     <div className="flex items-center justify-end mb-2">
-                      {Array(5).fill(0).map((_, i) => (
-                        <FaStar key={i} className={`w-4 h-4 ${i < Math.floor(provider.rating) ? 'text-yellow-400' : 'text-gray-300'}`} />
-                      ))}
-                      <span className="ml-2 text-sm font-medium text-gray-600">{provider.rating}</span>
+                      {Array(5)
+                        .fill(0)
+                        .map((_, i) => (
+                          <FaStar
+                            key={i}
+                            className={`w-4 h-4 ${
+                              i < Math.floor(provider.rating)
+                                ? "text-yellow-400"
+                                : "text-gray-300"
+                            }`}
+                          />
+                        ))}
+                      <span className="ml-2 text-sm font-medium text-gray-600">
+                        {provider.rating}
+                      </span>
                     </div>
-                    <p className="text-sm text-gray-500">{provider.experience} experience</p>
+                    <p className="text-sm text-gray-500">
+                      {provider.experience} experience
+                    </p>
                   </div>
                 </div>
-                
+
                 <p className="text-gray-700 mb-4">{provider.description}</p>
-                
+
                 <div className="grid grid-cols-2 gap-4 text-sm">
                   <div className="flex items-center">
                     <FaTools className="mr-2 text-green-600" />
@@ -181,7 +241,9 @@ export default function ServiceDetailsPage() {
 
               {/* Services Offered */}
               <div className="bg-white rounded-xl shadow-md p-6">
-                <h2 className="text-xl font-bold text-gray-900 mb-4">Services Offered</h2>
+                <h2 className="text-xl font-bold text-gray-900 mb-4">
+                  Services Offered
+                </h2>
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                   {provider.services.map((service: string, index: number) => (
                     <div key={index} className="flex items-center">
@@ -194,11 +256,18 @@ export default function ServiceDetailsPage() {
 
               {/* Availability */}
               <div className="bg-white rounded-xl shadow-md p-6">
-                <h2 className="text-xl font-bold text-gray-900 mb-4">Availability</h2>
+                <h2 className="text-xl font-bold text-gray-900 mb-4">
+                  Availability
+                </h2>
                 <div className="space-y-2">
                   {provider.availability.map((day: any, index: number) => (
-                    <div key={index} className="flex justify-between items-center py-2 border-b border-gray-100 last:border-b-0">
-                      <span className="font-medium text-gray-700">{day.day}</span>
+                    <div
+                      key={index}
+                      className="flex justify-between items-center py-2 border-b border-gray-100 last:border-b-0"
+                    >
+                      <span className="font-medium text-gray-700">
+                        {day.day}
+                      </span>
                       <span className="text-gray-600">{day.time}</span>
                     </div>
                   ))}
@@ -207,16 +276,32 @@ export default function ServiceDetailsPage() {
 
               {/* Reviews */}
               <div className="bg-white rounded-xl shadow-md p-6">
-                <h2 className="text-xl font-bold text-gray-900 mb-4">Customer Reviews</h2>
+                <h2 className="text-xl font-bold text-gray-900 mb-4">
+                  Customer Reviews
+                </h2>
                 <div className="space-y-4">
                   {provider.reviews.map((review: any, index: number) => (
-                    <div key={index} className="border-b border-gray-100 pb-4 last:border-b-0">
+                    <div
+                      key={index}
+                      className="border-b border-gray-100 pb-4 last:border-b-0"
+                    >
                       <div className="flex items-center justify-between mb-2">
-                        <span className="font-medium text-gray-900">{review.user}</span>
+                        <span className="font-medium text-gray-900">
+                          {review.user}
+                        </span>
                         <div className="flex items-center">
-                          {Array(5).fill(0).map((_, i) => (
-                            <FaStar key={i} className={`w-3 h-3 ${i < review.rating ? 'text-yellow-400' : 'text-gray-300'}`} />
-                          ))}
+                          {Array(5)
+                            .fill(0)
+                            .map((_, i) => (
+                              <FaStar
+                                key={i}
+                                className={`w-3 h-3 ${
+                                  i < review.rating
+                                    ? "text-yellow-400"
+                                    : "text-gray-300"
+                                }`}
+                              />
+                            ))}
                         </div>
                       </div>
                       <p className="text-gray-600 text-sm">{review.comment}</p>
@@ -229,8 +314,10 @@ export default function ServiceDetailsPage() {
             {/* Right Column - Booking Form */}
             <div className="lg:col-span-1">
               <div className="bg-white rounded-xl shadow-md p-6 sticky top-8">
-                <h2 className="text-xl font-bold text-gray-900 mb-6">Book This Service</h2>
-                
+                <h2 className="text-xl font-bold text-gray-900 mb-6">
+                  Book This Service
+                </h2>
+
                 <form onSubmit={handleBooking} className="space-y-4">
                   {/* Date Selection */}
                   <div>
@@ -242,7 +329,7 @@ export default function ServiceDetailsPage() {
                       type="date"
                       value={selectedDate}
                       onChange={(e) => setSelectedDate(e.target.value)}
-                      min={new Date().toISOString().split('T')[0]}
+                      min={new Date().toISOString().split("T")[0]}
                       className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-green-500"
                       required
                     />
@@ -358,9 +445,13 @@ export default function ServiceDetailsPage() {
 
                 {/* Price Estimate */}
                 <div className="mt-6 p-4 bg-green-50 rounded-lg">
-                  <h3 className="font-medium text-green-800 mb-2">Price Estimate</h3>
+                  <h3 className="font-medium text-green-800 mb-2">
+                    Price Estimate
+                  </h3>
                   <p className="text-sm text-green-700">{provider.pricing}</p>
-                  <p className="text-xs text-green-600 mt-1">*Final price will be confirmed after booking</p>
+                  <p className="text-xs text-green-600 mt-1">
+                    *Final price will be confirmed after booking
+                  </p>
                 </div>
               </div>
             </div>
@@ -370,4 +461,4 @@ export default function ServiceDetailsPage() {
       <Footer />
     </div>
   );
-} 
+}
