@@ -26,16 +26,33 @@ export const createService = async (serviceData: any) => {
   }
 };
 
-export const getAllservices = async () => {
+export const getMyServices = async () => {
   if (!accessToken) {
-    throw new Error("You are not authenticated");
+    throw new Error("Access token is missing");
   }
+  try {
+    const res = await fetch("api/services/my-services", {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: accessToken,
+      },
+      cache: "no-store",
+    });
+    const result = await res.json();
+    return result;
+  } catch (error) {
+    console.error("Error fetching my services:", error);
+    throw new Error("Failed to fetch my services");
+  }
+};
+
+export const getAllservices = async () => {
   try {
     const res = await fetch("api/services", {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
-        Authorization: accessToken,
       },
       cache: "no-store",
     });
@@ -48,15 +65,11 @@ export const getAllservices = async () => {
 };
 
 export const getServiceById = async (id: string) => {
-  if (!accessToken) {
-    throw new Error("You are not authenticated");
-  }
   try {
     const res = await fetch(`api/services/${id}`, {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
-        Authorization: accessToken,
       },
       cache: "no-store",
     });
