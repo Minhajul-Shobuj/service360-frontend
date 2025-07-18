@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 "use client";
 
 import { useState, useEffect } from "react";
@@ -175,7 +176,7 @@ export default function ServiceDetailsPage() {
                     <div className="w-16 h-16 rounded-full bg-green-100 flex items-center justify-center text-green-700 font-bold text-2xl mr-4">
                       {provider.name
                         .split(" ")
-                        .map((n) => n[0])
+                        .map((n: any) => n[0])
                         .join("")
                         .toUpperCase()}
                     </div>
